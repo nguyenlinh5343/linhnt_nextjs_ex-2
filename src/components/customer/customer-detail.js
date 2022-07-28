@@ -34,7 +34,6 @@ export const CustomerDetail = ({customers, ...rest }) => {
 
     setSelectedCustomerIds(newSelectedCustomerIds);
   };
-
   const handleSelectOne = (event, id) => {
     const selectedIndex = selectedCustomerIds.indexOf(id);
     let newSelectedCustomerIds = [];
@@ -62,7 +61,7 @@ export const CustomerDetail = ({customers, ...rest }) => {
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
-// console.log(customers.createdAt.toStrings());
+// console.log(customers.createdAt.slice(0, 10));
   return (
     <Card {...rest}>
       <PerfectScrollbar>
@@ -147,7 +146,7 @@ export const CustomerDetail = ({customers, ...rest }) => {
                     {customers.phone}
                   </TableCell>
                   <TableCell>
-                    {customers.createdAt}
+                    {customers.createdAt.replace(/-/g, "/").slice(0, 10)}
                   </TableCell>
                 </TableRow>
             {/* ))} */}

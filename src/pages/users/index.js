@@ -7,17 +7,19 @@ import { DashboardLayout } from '../../components/dashboard-layout';
 import axios from 'axios';
 import React, { useEffect, useState} from 'react';
 
-function Customers(){
-	const[users, setusers] = useState([]);
-	useEffect(()=>{
-		let url = 'https://62dc1d5257ac3c3f3c563801.mockapi.io/quiz/users'
-		axios.get(url)
-		.then(res=>{
-				const a = res.data
-				setusers(a)
-				console.log(a)
-		})
-}, [])
+export default function Customers({ users }){
+// 	const[users, setusers] = useState([]);
+// 	useEffect(()=>{
+// 		let url = 'https://62dc1d5257ac3c3f3c563801.mockapi.io/quiz/users'
+// 		axios.get(url)
+// 		.then(res=>{
+// 				const a = res.data
+// 				setusers(a)
+// 				console.log(a)
+// 		})
+// }, [])
+console.log(users);
+
 return(
 	<>
 	<Head>
@@ -48,13 +50,16 @@ Customers.getLayout = (page) => (
   </DashboardLayout>
 );
 
-export default Customers;
-
-// export async function getStaticProps() {
-// 	const response = await fetch("https://62dc1d5257ac3c3f3c563801.mockapi.io/quiz/users");
-	
-//   return {
-//     props: {
-//          },
-//   }
-// }
+// export default Customers();
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://62dc1d5257ac3c3f3c563801.mockapi.io/quiz/users')
+  const users = await res.json()
+  // By returning { props: { users } }, the Blog component
+  // will receive `users` as a prop at build time
+  return {
+    props: {
+      users,
+    },
+  }
+}
